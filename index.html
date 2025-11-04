@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Risco e Vulnerabilidade (APS)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="container">
+        <h1>Escala de Risco e Vulnerabilidade Clínica (APS)</h1>
+        <p>Preencha os campos abaixo para calcular o escore do paciente.</p>
+
+        <form id="riskForm">
+            <div class="form-group">
+                <label>Idade</label>
+                <div>
+                    <input type="radio" id="idade_0" name="idade" value="0" checked>
+                    <label for="idade_0">Menor que 75 anos</label>
+                </div>
+                <div>
+                    <input type="radio" id="idade_1" name="idade" value="1">
+                    <label for="idade_1">75 a 84 anos (+1 ponto)</label>
+                </div>
+                <div>
+                    <input type="radio" id="idade_2" name="idade" value="2">
+                    <label for="idade_2">> 85 anos (+2 pontos)</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Multimorbidade</label>
+                <div>
+                    <input type="radio" id="morb_0" name="multimorbidade" value="0" checked>
+                    <label for="morb_0">Nenhuma</label>
+                </div>
+                <div>
+                    <input type="radio" id="morb_2" name="multimorbidade" value="2">
+                    <label for="morb_2">N° de comorbidades (≥ 5) (+2 pontos)</label>
+                </div>
+                <div>
+                    <input type="radio" id="morb_5" name="multimorbidade" value="5">
+                    <label for="morb_5">Descompensação clínica (+5 pontos)</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Polifarmácia</label>
+                <div>
+                    <input type="radio" id="poli_0" name="polifarmacia" value="0" checked>
+                    <label for="poli_0">Não (Menos que 5)</label>
+                </div>
+                <div>
+                    <input type="radio" id="poli_2" name="polifarmacia" value="2">
+                    <label for="poli_2">Sim (N° de medicamentos ≥ 5) (+2 pontos)</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Dependência Funcional</label>
+                <div>
+                    <input type="radio" id="dep_0" name="dependencia" value="0" checked>
+                    <label for="dep_0">Nenhuma</label>
+                </div>
+                <div>
+                    <input type="radio" id="dep_1" name="dependencia" value="1">
+                    <label for="dep_1">AVDs instrumentais (+1 ponto)</label>
+                </div>
+                <div>
+                    <input type="radio" id="dep_2" name="dependencia" value="2">
+                    <label for="dep_2">AVDs Básicas e instrumentais (+2 pontos)</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Mobilidade</label>
+                <div>
+                    <input type="radio" id="mob_0" name="mobilidade" value="0" checked>
+                    <label for="mob_0">Nenhuma dificuldade</label>
+                </div>
+                <div>
+                    <input type="radio" id="mob_1" name="mobilidade" value="1">
+                    <label for="mob_1">Dificuldade de marcha (+1 ponto)</label>
+                </div>
+                <div>
+                    <input type="radio" id="mob_2" name="mobilidade" value="2">
+                    <label for="mob_2">Risco de queda (+2 pontos)</label>
+                </div>
+                <div>
+                    <input type="radio" id="mob_3" name="mobilidade" value="3">
+                    <label for="mob_3">Acamado (+3 pontos)</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Suporte familiar</label>
+                <div>
+                    <input type="radio" id="sup_0" name="suporte" value="0" checked>
+                    <label for="sup_0">Nenhum</label>
+                </div>
+                <div>
+                    <input type="radio" id="sup_1" name="suporte" value="1">
+                    <label for="sup_1">Disfunção familiar (+1 ponto)</label>
+                </div>
+                <div>
+                    <input type="radio" id="sup_2" name="suporte" value="1">
+                    <label for="sup_2">Sobrecarga do cuidador (+1 ponto)</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Fragilidade</label>
+                <div>
+                    <input type="radio" id="frag_0" name="fragilidade" value="0" checked>
+                    <label for="frag_0">Nenhuma</label>
+                </div>
+                <div>
+                    <input type="radio" id="frag_2" name="fragilidade" value="2">
+                    <label for="frag_2">Síndrome demencial, depressão, Parkinson, etc. (+2 pontos)</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Cuidados Paliativos (PPS)</label>
+                <div>
+                    <input type="radio" id="pps_0" name="pps" value="0" checked>
+                    <label for="pps_0">N/A</label>
+                </div>
+                <div>
+                    <input type="radio" id="pps_2" name="pps" value="2">
+                    <label for="pps_2">PPS 80 a 100 (+2 pontos)</label>
+                </div>
+                <div>
+                    <input type="radio" id="pps_5" name="pps" value="5">
+                    <label for="pps_5">PPS 50 a 70 (+5 pontos)</label>
+                </div>
+                <div>
+                    <input type="radio" id="pps_8" name="pps" value="8">
+                    <label for="pps_8">PPS 30 a 40 (+8 pontos)</label>
+                </div>
+                <div>
+                    <input type="radio" id="pps_10" name="pps" value="10">
+                    <label for="pps_10">PPS < 20 (+10 pontos)</label>
+                </div>
+            </div>
+
+            <div class="buttons">
+                <button type="submit">Calcular Escore</button>
+                <button type="reset">Limpar</button>
+            </div>
+        </form>
+
+        <div id="results" class="results-container">
+            </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
