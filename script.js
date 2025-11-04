@@ -15,20 +15,25 @@ document.addEventListener("DOMContentLoaded", function() {
         // Pega todos os nomes dos campos do formulário
         const indicators = [
             'idade', 'multimorbidade', 'polifarmacia', 
-            'dependencia', 'mobilidade', 'suporte', 
-            'fragilidade', 'pps'
+            'dependencia', 'mobilidade', 'suporte', 'pps'
         ];
 
-        // Cria um objeto para pegar os dados do formulário
-        const formData = new FormData(form);
-
-        // Loop para somar os pontos de cada indicador
+        // 1. Loop para somar os pontos dos indicadores de RÁDIO
         indicators.forEach(indicator => {
             // Pega o valor (pontos) do botão de rádio selecionado
             const value = formData.get(indicator);
             if (value) {
                 totalScore += parseInt(value, 10);
             }
+        });
+        
+        // 2. TRATAMENTO ESPECÍFICO PARA FRAGILIDADE (CHECKBOXES)
+        // Pega todos os checkboxes de fragilidade que estão MARCADOSe possuem o nome 'fragilidade'
+        const fragilityCheckboxes = document.querySelectorAll('input[name="fragilidade"]:checked');
+        
+        fragilityCheckboxes.forEach(checkbox => {
+            // Soma o valor de cada checkbox marcado (e converte para número)
+            totalScore += parseInt(checkbox.value, 10);
         });
 
         // Determina a classificação e o tempo de visita
@@ -70,4 +75,5 @@ document.addEventListener("DOMContentLoaded", function() {
             return ['Muito Alto', '1 a 2 meses', 'risco-muito-alto'];
         }
     }
+
 });
