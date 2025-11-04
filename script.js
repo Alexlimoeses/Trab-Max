@@ -12,35 +12,40 @@ document.addEventListener("DOMContentLoaded", function() {
         
         let totalScore = 0;
         
-        // Pega todos os nomes dos campos do formulário (sem 'fragilidade')
-        const indicators = [
-            'idade', 'multimorbidade', 'polifarmacia', 
-            'dependencia', 'mobilidade', 'suporte', 
-            'pps'
+        // Indicadores que continuam como RADIO BUTTONS (seleção única)
+        const radioIndicators = [
+            'idade', 'polifarmacia', 'mobilidade', 'pps'
+        ];
+        
+        // Indicadores que foram convertidos para CHECKBOXES (múltipla seleção)
+        const checkboxIndicators = [
+            'multimorbidade', 'dependencia', 'suporte', 'fragilidade'
         ];
 
         // Cria um objeto para pegar os dados do formulário
         const formData = new FormData(form);
 
         // 1. Loop para somar os pontos dos indicadores de RÁDIO
-        indicators.forEach(indicator => {
+        radioIndicators.forEach(indicator => {
             // Pega o valor (pontos) do botão de rádio selecionado
             const value = formData.get(indicator);
             if (value) {
                 totalScore += parseInt(value, 10);
             }
         });
-        
-        // 2. TRATAMENTO ESPECÍFICO PARA FRAGILIDADE (CHECKBOXES)
-        // Pega todos os checkboxes de fragilidade que estão MARCADOSe possuem o nome 'fragilidade'
-        const fragilityCheckboxes = document.querySelectorAll('input[name="fragilidade"]:checked');
-        
-        fragilityCheckboxes.forEach(checkbox => {
-            // Soma o valor de cada checkbox marcado (e converte para número)
-            totalScore += parseInt(checkbox.value, 10);
+
+        // 2. Loop para somar os pontos dos indicadores de CHECKBOXES
+        checkboxIndicators.forEach(indicator => {
+            // Pega todos os checkboxes marcados para o nome do indicador
+            // Usa document.querySelectorAll pois FormData.get() não funciona bem com múltiplos checkboxes
+            const checkboxes = document.querySelectorAll(`input[name="${indicator}"]:checked`);
+            
+            checkboxes.forEach(checkbox => {
+                // Soma o valor de cada checkbox marcado
+                totalScore += parseInt(checkbox.value, 10);
+            });
         });
-        // FIM DO TRATAMENTO ESPECÍFICO
-        
+
         // Determina a classificação e o tempo de visita
         const [classification, time, riskClass] = getClassification(totalScore);
 
@@ -59,7 +64,6 @@ document.addEventListener("DOMContentLoaded", function() {
         // Mostra o container de resultados
         resultsDiv.style.display = "block";
     });
-
 
     // Adiciona um "ouvinte" para o botão "Limpar" (reset)
     form.addEventListener("reset", function() {
@@ -82,13 +86,3 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
-
-
-
-
-
-
-
-
-    
-    // ... (o restante do script permanece o mesmo) ...
